@@ -1,6 +1,7 @@
 import { Link, Route, Routes, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
+import { Link, Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import ProductsPage from './pages/ProductsPage';
 import CartPage from './pages/CartPage';
@@ -25,6 +26,12 @@ export default function App() {
   return (
     <div className="app-shell">
       <header className="topbar glass">
+export default function App() {
+  const { cartCount } = useStore();
+
+  return (
+    <div className="app-shell">
+      <header className="topbar">
         <div>
           <h1>KiranaKart</h1>
           <p>Your Local Grocery Partner</p>
@@ -67,6 +74,20 @@ export default function App() {
           </>
         )}
       </AnimatePresence>
+          <Link to="/cart">Cart ({cartCount})</Link>
+        </nav>
+      </header>
+      <main>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/products" element={<ProductsPage />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/confirmation" element={<ConfirmationPage />} />
+          <Route path="/account" element={<AccountPage />} />
+          <Route path="/admin" element={<AdminPage />} />
+        </Routes>
+      </main>
     </div>
   );
 }

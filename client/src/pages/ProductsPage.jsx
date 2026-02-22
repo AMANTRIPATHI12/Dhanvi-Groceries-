@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
+import { useMemo, useState } from 'react';
 import { categories } from '../data/catalog';
 import { useStore } from '../context/StoreContext';
 
@@ -28,6 +29,7 @@ export default function ProductsPage() {
   return (
     <div className="page">
       <section className="card filters glass">
+      <section className="card filters">
         <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Dynamic search..." />
         <select value={category} onChange={(e) => setCategory(e.target.value)}>
           <option>All</option>
@@ -44,6 +46,9 @@ export default function ProductsPage() {
         {loading && Array.from({ length: 6 }).map((_, i) => <div className="skeleton" key={i} />)}
         {!loading && filtered.map((p, index) => (
           <motion.article className="product-card" key={p.id} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.04 }} whileHover={{ scale: 1.03 }}>
+      <section className="product-grid">
+        {filtered.map((p) => (
+          <article className="product-card" key={p.id}>
             <span>{p.image}</span>
             <h4>{p.name}</h4>
             <p>{p.category}</p>
@@ -53,6 +58,11 @@ export default function ProductsPage() {
             </select>
             <button onClick={() => addToCart(p, weights[p.id] || p.weights[0])}>Add to Cart</button>
           </motion.article>
+            <select id={`${p.id}-weight`}>
+              {p.weights.map((w) => <option key={w}>{w}</option>)}
+            </select>
+            <button onClick={() => addToCart(p, document.getElementById(`${p.id}-weight`).value)}>Add to Cart</button>
+          </article>
         ))}
       </section>
     </div>

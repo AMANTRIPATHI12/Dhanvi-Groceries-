@@ -3,6 +3,9 @@ import { motion } from 'framer-motion';
 import { categories, products } from '../data/catalog';
 
 const trust = ['🚚 Free Home Delivery', '⚡ Same Day Delivery', '🏪 Trusted Since 2010', '✅ Quality Assured'];
+import { categories, products } from '../data/catalog';
+
+const trust = ['Free Home Delivery', 'Same Day Delivery', 'Trusted Since 2010', 'Quality Assured'];
 
 export default function HomePage() {
   const bestsellers = products.filter((p) => p.bestseller);
@@ -10,6 +13,7 @@ export default function HomePage() {
   return (
     <div className="page">
       <motion.section className="hero card" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+      <section className="hero card">
         <h2>FreshBasket Kirana</h2>
         <p>Daily essentials delivered within 2–5 km in under 60 minutes.</p>
         <div className="actions">
@@ -21,27 +25,35 @@ export default function HomePage() {
       </motion.section>
 
       <motion.section className="card" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
+      </section>
+
+      <section className="card">
         <h3>Shop by Category</h3>
         <div className="grid">
           {categories.map((category) => <div key={category} className="pill">{category}</div>)}
         </div>
       </motion.section>
+      </section>
 
       <section className="card">
         <h3>Best Sellers</h3>
         <div className="product-grid">
           {bestsellers.map((product, index) => (
             <motion.article key={product.id} className="product-card" initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.05 }} viewport={{ once: true }}>
+          {bestsellers.map((product) => (
+            <article key={product.id} className="product-card">
               <span>{product.image}</span>
               <h4>{product.name}</h4>
               <p>₹{product.price}</p>
               <p>{product.weights.join(' / ')}</p>
             </motion.article>
+            </article>
           ))}
         </div>
       </section>
 
       <motion.section className="card offer" whileHover={{ scale: 1.01 }}>🔥 Weekly Offer: Flat 10% off above ₹999. Use code: KIRANA10</motion.section>
+      <section className="card offer">🔥 Weekly Offer: Flat 10% off above ₹999. Use code: KIRANA10</section>
 
       <section className="card trust-grid">
         {trust.map((item) => <div key={item}>{item}</div>)}

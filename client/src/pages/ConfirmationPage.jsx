@@ -10,10 +10,12 @@ export default function ConfirmationPage() {
   return (
     <motion.div className="page card success" initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}>
       <motion.div className="success-badge" initial={{ rotate: -12, scale: 0.5 }} animate={{ rotate: 0, scale: 1 }}>✓</motion.div>
+    <div className="page card">
       <h2>Order Confirmed 🎉</h2>
       <p>Order ID: {order.id}</p>
       <p>Estimated Delivery Time: {order.eta}</p>
       <a className="btn btn-green" href={`https://wa.me/919999999999?text=${summary}`}>Send WhatsApp Summary</a>
     </motion.div>
+    </div>
   );
 }

@@ -5,6 +5,10 @@ import { useStore } from '../context/StoreContext';
 
 const fieldOrder = ['name', 'phone', 'address', 'landmark', 'pincode', 'deliveryTime'];
 
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useStore } from '../context/StoreContext';
+
 export default function CheckoutPage() {
   const navigate = useNavigate();
   const { placeOrder, cart } = useStore();
