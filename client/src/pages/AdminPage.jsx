@@ -24,6 +24,7 @@ export default function AdminPage() {
       <input value={offer} onChange={(e) => setOffer(e.target.value)} />
       <h3>Product Management</h3>
       {products.map((p) => (
+        <div key={p.id} className="cart-row admin-row">
         <div key={p.id} className="cart-row">
           <span>{p.name}</span>
           <input type="number" value={p.price} onChange={(e) => updatePrice(p.id, e.target.value)} />
@@ -31,6 +32,7 @@ export default function AdminPage() {
         </div>
       ))}
       <h3>Order Dashboard</h3>
+      {orders.map((o) => <p key={o.id} className="admin-row">{o.id} - {o.status} - ₹{o.total}</p>)}
       {orders.map((o) => <p key={o.id}>{o.id} - {o.status} - ₹{o.total}</p>)}
       <p>Sales Analytics: Orders {orders.length}, Revenue ₹{orders.reduce((a, b) => a + b.total, 0)}</p>
       <button onClick={exportCsv}>Export Excel (CSV)</button>

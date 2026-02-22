@@ -1,3 +1,10 @@
+import { useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { useStore } from '../context/StoreContext';
+
+const fieldOrder = ['name', 'phone', 'address', 'landmark', 'pincode', 'deliveryTime'];
+
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useStore } from '../context/StoreContext';
@@ -6,6 +13,8 @@ export default function CheckoutPage() {
   const navigate = useNavigate();
   const { placeOrder, cart } = useStore();
   const [form, setForm] = useState({ name: '', phone: '', address: '', landmark: '', deliveryTime: '', payment: 'COD', pincode: '' });
+
+  const completedSteps = useMemo(() => fieldOrder.filter((field) => form[field]).length, [form]);
 
   const submit = (e) => {
     e.preventDefault();
@@ -18,6 +27,10 @@ export default function CheckoutPage() {
   return (
     <form className="page card form" onSubmit={submit}>
       <h2>Checkout</h2>
+      <div className="step-wrap">
+        <div className="step-meta">Step Progress: {completedSteps}/6</div>
+        <div className="step-track"><motion.span className="step-fill" animate={{ width: `${(completedSteps / 6) * 100}%` }} /></div>
+      </div>
       {Object.keys(form).map((k) => (
         k === 'payment' ? (
           <select key={k} value={form[k]} onChange={(e) => setForm({ ...form, [k]: e.target.value })}>
